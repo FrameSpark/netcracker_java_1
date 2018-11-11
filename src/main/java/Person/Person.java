@@ -44,7 +44,7 @@ public class Person {
         if(gender == "male"){
             this.gender = true;
         }
-        else {
+        if(gender == "female"){
             this.gender = false;
         }
     }
