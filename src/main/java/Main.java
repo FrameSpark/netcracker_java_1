@@ -1,7 +1,7 @@
-import Person.Controller;
+import Person.Comparators.PersonAgeComparator;
 import Person.Repository;
-import org.joda.time.LocalDate;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -62,6 +62,9 @@ public class Main {
                     temp = scanner.nextInt();
                     controller.print("\n");
                     repos.showPersonByIndex(temp);
+                case 7:
+                    Comparator<Person> compAge = new PersonAgeComparator();
+
 
                     break;
                 case 0:

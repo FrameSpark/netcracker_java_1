@@ -1,7 +1,10 @@
 package Person;
 
+import java.util.Comparator;
+
 public class Repository {
     private Person repos[];
+    private Comparator<Person> compAge;
     private int size;
 
         public int getSize() {
@@ -13,7 +16,7 @@ public class Repository {
         }
 
         public Repository(int size){
-            this.setSize(size);
+            setSize(size);
             repos = new Person[size];
         }
 
@@ -22,9 +25,9 @@ public class Repository {
      * @param newPerson Объект человек
      */
     public void insertPerson(Person newPerson){
-            this.setSize(this.getSize() + 1);
-            Person temp[]=new Person[this.getSize()];
-            for(int i=0; i<this.getSize()-1;i++){
+            setSize(this.getSize() + 1);
+            Person temp[]=new Person[getSize()];
+            for(int i=0; i<getSize()-1;i++){
                 temp[i] = repos[i];
             }
             temp[getSize()-1] = newPerson;
@@ -37,7 +40,7 @@ public class Repository {
      * @return true если входит
      */
     private boolean inRange(int index){
-        if(index < this.getSize() && index >0){
+        if(index < getSize() && index >0){
             return true;
         }
         else{
@@ -52,7 +55,7 @@ public class Repository {
      */
     public void showPersonByIndex(int i){
         if(inRange(i)){
-            System.out.println(repos[i].getId() + " " + repos[i].getFullName() + " " + repos[i].getAge() + " " +repos[i].getDateOfBirth());
+            repos[i].showPerson();
         }
 
         }
@@ -75,7 +78,7 @@ public class Repository {
 
         public void deletePersonByIndex(int index){
             if(inRange(index)){
-                this.size--;
+                size--;
                 Person temp[]=new Person[size];
                 for(int i=0,j=0; i<size; i++, j++ ){
                     if(j == index)
@@ -89,10 +92,13 @@ public class Repository {
         }
 
 
+    /**
+     * Вывод всего репозитория
+     *
+     */
     public void showArray(){
         for(int i=0; i<size;i++){
-            System.out.println(repos[i].getId() + " " + repos[i].getFullName() + " " + repos[i].getAge() + " " +repos[i].getDateOfBirth());
-
+            repos[i].showPerson();
         }
     }
 }

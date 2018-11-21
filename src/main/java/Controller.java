@@ -1,5 +1,4 @@
-package Person;
-
+import Person.Person;
 import org.joda.time.LocalDate;
 
 import java.util.Scanner;
@@ -13,6 +12,7 @@ public class Controller {
         System.out.println("4 - Change an person by index");
         System.out.println("5 - Show an repository");
         System.out.println("6- Show person by index");
+        System.out.println("7- Compare to age person by index");
         System.out.println("0 - Exit");
         System.out.println("Press action: ");
     }
@@ -25,7 +25,7 @@ public class Controller {
         String tempStr;
         LocalDate tempDate;
         String tempForDate;
-        String tempG;
+        int tempG;
         Controller controller = new Controller();
         Scanner scanner = new Scanner(System.in);
 
@@ -33,8 +33,8 @@ public class Controller {
         temp = scanner.nextInt();
         controller.print("Fio");
         tempStr = scanner.next();
-        controller.print("Gender");
-        tempG = scanner.next();
+        controller.print("IsMale(0,1)");
+        tempG = scanner.nextInt();
         controller.print("Date of birth yyyy-mm-dd");
         tempForDate = scanner.next();
         tempDate = new LocalDate(tempForDate);

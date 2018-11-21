@@ -4,6 +4,8 @@ package Person;
 
 import org.joda.time.LocalDate;
 
+
+
 /**
  * Класс хранит информацию о человеке.
  * id - идентификатор человека
@@ -13,17 +15,22 @@ import org.joda.time.LocalDate;
  * dateOfBirth - дата рождения
  */
 
-public class Person {
+public class Person{
     private int id;
     private String fullName;
-    private boolean gender;
+    private int gender;
     private int age;
     private LocalDate dateOfBirth;
+
+
 
     public int getId() {
         return id;
     }
 
+    public int getGender(){
+        return this.gender;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -36,17 +43,9 @@ public class Person {
         this.fullName = fullName;
     }
 
-    public boolean isGender() {
-        return gender;
-    }
 
-    public void setGender(String gender) {
-        if(gender == "male"){
-            this.gender = true;
-        }
-        if(gender == "female"){
-            this.gender = false;
-        }
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     /**
@@ -61,8 +60,10 @@ public class Person {
         if(nowDate.getMonthOfYear() - dateOfBirth.getMonthOfYear() < 0) {
             temp--;
         }
+        if(nowDate.getMonthOfYear() - dateOfBirth.getMonthOfYear() == 0){
         if(nowDate.getDayOfMonth() - dateOfBirth.getDayOfMonth() <0 ){
             temp--;
+        }
         }
         return temp;
     }
@@ -80,12 +81,32 @@ public class Person {
     }
 
 
+    /**
+     * Конструктор
+     * @param id
+     * @param fullName
+     * @param gender
+     * @param dateOfBirth
+     */
 
-    public Person(int id, String fullName, String gender, LocalDate dateOfBirth) {
+    public Person(int id, String fullName, int gender, LocalDate dateOfBirth) {
         this.setId(id);
         this.setFullName(fullName);
         this.setGender(gender);
         this.setDateOfBirth(dateOfBirth);
         this.setAge(getAge());
     }
+
+    void showPerson(){
+        System.out.println(getId() + " " + getFullName() + " isMale "  + getGender()+ " Age: "+ getAge() + " " +getDateOfBirth());
+    }
+
+
+    public int compare(Person o1, Person o2) {
+        int fullName = o1.fullName.compareTo(o2.fullName);
+
+
+        return o1.age - o2.age;
+    }
+}
 }
