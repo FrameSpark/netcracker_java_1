@@ -1,5 +1,6 @@
 import Person.Comparators.PersonAgeComparator;
 import Person.Repository;
+import Sortings.BubbleSort;
 
 import java.util.Comparator;
 import java.util.Scanner;
@@ -8,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
         Scanner scanner = new Scanner(System.in);
-        Repository repos = new Repository(0);
+        BubbleSort b = new BubbleSort();
+        Repository repos = new Repository(0,b);
         boolean run = true;
         int select =0;
         int temp;
@@ -63,9 +65,11 @@ public class Main {
                     controller.print("\n");
                     repos.showPersonByIndex(temp);
                 case 7:
-                    Comparator<Person> compAge = new PersonAgeComparator();
-
-
+                    repos.sortById();
+                    repos.showArray();
+                    break;
+                case 8:
+                    repos.searchByName("Ilia");
                     break;
                 case 0:
                     run = false;

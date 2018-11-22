@@ -96,17 +96,15 @@ public class Person{
         this.setDateOfBirth(dateOfBirth);
         this.setAge(getAge());
     }
+    public Person(){
+
+    }
 
     void showPerson(){
         System.out.println(getId() + " " + getFullName() + " isMale "  + getGender()+ " Age: "+ getAge() + " " +getDateOfBirth());
     }
 
 
-    public int compare(Person o1, Person o2) {
-        int fullName = o1.fullName.compareTo(o2.fullName);
 
+}
 
-        return o1.age - o2.age;
-    }
-}
-}

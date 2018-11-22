@@ -1,24 +1,94 @@
 package Person;
 
+import Person.Comparators.PersonAgeComparator;
+import Person.Comparators.PersonIdComparator;
+import Person.Comparators.PersonNameComparator;
+import Sortings.Sort;
+
 import java.util.Comparator;
 
 public class Repository {
     private Person repos[];
-    private Comparator<Person> compAge;
+    private Comparator<Person> compAge = new PersonAgeComparator();
+    private Comparator<Person> compName = new PersonNameComparator();
+    private Comparator<Person> compId = new PersonIdComparator();
+    private Sort sorter;
     private int size;
 
         public int getSize() {
             return size;
         }
-
         public void setSize(int size) {
             this.size = size;
         }
 
-        public Repository(int size){
+        public Repository(int size, Sort typeSort){
             setSize(size);
             repos = new Person[size];
+            sorter = typeSort;
         }
+
+        private void sorting(Person repos[],Comparator<Person> comp){
+            sorter.sort(repos,comp);
+        }
+
+        public void sortByName(){
+            sorting(repos,compName);
+        }
+
+        public void sortByAge(){
+            sorting(repos,compAge);
+        }
+        public void sortById(){
+            sorting(repos,compId);
+        }
+
+        private boolean checkName(String name,Person person)
+        {
+            Person temp = new Person();
+            temp.setFullName(name);
+            if(compName.compare(temp,person) ==  0)
+                return true;
+            return false;
+        }
+        private boolean checkAge(int value, Person person){
+            Person temp = new Person();
+            temp.setAge(value);
+            if(compAge.compare(temp,person) ==  0)
+                return true;
+            return false;
+        }
+        private boolean checkId(int value, Person person){
+            Person temp = new Person();
+            temp.setAge(value);
+            if(compId.compare(temp,person) ==  0)
+                return true;
+            return false;
+        }
+
+    public void searchByName(String name){
+        for(int i=0;i<getSize();i++) {
+            if(checkName(name,repos[i])){
+                showPersonByIndex(i);
+            }
+        }
+    }
+
+    public void searchByAge(int value){
+        for(int i=0;i<getSize();i++) {
+            if(checkAge(value,repos[i])){
+                showPersonByIndex(i);
+            }
+        }
+    }
+    public void searchById(int value){
+        for(int i=0;i<getSize();i++) {
+            if(checkId(value,repos[i])){
+                showPersonByIndex(i);
+            }
+        }
+    }
+
 
     /**
      * Добавление человека в репозиторий

@@ -1,5 +1,9 @@
 package Sortings;
 
+import Person.Person;
+
+import java.util.Comparator;
+
 public abstract class Sort {
-   abstract void sort(Object obj);
+   public abstract void sort(Person mas[], Comparator<Person> comp);
 }
