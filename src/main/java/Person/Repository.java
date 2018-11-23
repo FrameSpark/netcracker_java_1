@@ -60,15 +60,14 @@ public class Repository {
             return false;
         }
         private boolean checkAge(int value, Person person){
-            Person temp = new Person();
-            temp.setAge(value);
-            if(compAge.compare(temp,person) ==  0)
+
+            if(value - person.getAge() ==  0)
                 return true;
             return false;
         }
         private boolean checkId(int value, Person person){
             Person temp = new Person();
-            temp.setAge(value);
+            temp.setId(value);
             if(compId.compare(temp,person) ==  0)
                 return true;
             return false;

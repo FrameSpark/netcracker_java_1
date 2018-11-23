@@ -1,19 +1,15 @@
-import Person.Comparators.PersonAgeComparator;
+import Person.Person;
 import Person.Repository;
 import Sortings.BubbleSort;
-import Test.RepositoryTest;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import java.util.Comparator;
-import java.util.Scanner;
+import Sortings.GnomeSort;
+import Sortings.ShellSort;
+import org.joda.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        JUnitCore runner = new JUnitCore();
-        Result result = runner.run(RepositoryTest.class);
-        System.out.println("Failed test: " + result.getFailureCount());
-        System.out.println("Success: " + result.wasSuccessful());
+
+
+
         /*
         Controller controller = new Controller();
         Scanner scanner = new Scanner(System.in);

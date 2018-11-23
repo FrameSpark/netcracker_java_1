@@ -4,26 +4,13 @@ import Person.Person;
 import Person.Repository;
 import Sortings.BubbleSort;
 import Sortings.GnomeSort;
-import Sortings.ShakeSort;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import Sortings.ShellSort;
 import org.joda.time.LocalDate;
-import org.junit.Before;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(Arquillian.class)
-public class RepositoryTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(Person.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
+
+class RepositoryTest {
 
     private Repository r1;
     private Repository r2;
@@ -41,51 +28,75 @@ public class RepositoryTest {
 
     }
 
-    @Before
+
+    @org.junit.jupiter.api.BeforeEach
     public void init(){
         r1 = new Repository(0,new BubbleSort());
         r2 = new Repository(0,new GnomeSort());
-        r3 = new Repository(0,new ShakeSort());
+        r3 = new Repository(0,new ShellSort());
+
+
         addPerson(r1);
         addPerson(r2);
         addPerson(r3);
+
     }
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void sortByName() {
+        r1.sortByName();
+        assertEquals(r1.repos[0].getFullName(),"Alex");
+        assertEquals(r1.repos[3].getFullName(),"Viacheslav");
+        r2.sortByName();
+        assertEquals(r2.repos[0].getFullName(),"Alex");
+        assertEquals(r2.repos[3].getFullName(),"Viacheslav");
+        r3.sortByName();
+        assertEquals(r3.repos[0].getFullName(),"Alex");
+        assertEquals(r3.repos[3].getFullName(),"Viacheslav");
     }
 
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void sortByAge() {
+
         r1.sortByAge();
-        assertEquals(r1.repos[0].getAge(),21);
-        assertEquals(r1.repos[3].getAge(),18);
+        assertEquals(r1.repos[0].getAge(),18);
+        assertEquals(r1.repos[3].getAge(),21);
+        r2.sortByAge();
+        assertEquals(r2.repos[0].getAge(),18);
+        assertEquals(r2.repos[3].getAge(),21);
+        r3.sortByAge();
+        assertEquals(r3.repos[0].getAge(),18);
+        assertEquals(r3.repos[3].getAge(),21);
     }
 
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void sortById() {
         r1.sortById();
         assertEquals(r1.repos[0].getId(),1);
         assertEquals(r1.repos[3].getId(),10);
+        r2.sortById();
+        assertEquals(r2.repos[0].getId(),1);
+        assertEquals(r2.repos[3].getId(),10);
+        r3.sortById();
+        assertEquals(r3.repos[0].getId(),1);
+        assertEquals(r3.repos[3].getId(),10);
     }
 
-    @org.junit.Test
-    public void searchByName() {
+
+    @org.junit.jupiter.api.Test
+    void searchByName() {
+        Repository search = r1.searchByName("Viacheslav");
+        assertEquals(search.repos[0].getFullName(), "Viacheslav");
     }
 
-    @org.junit.Test
-    public void searchByAge() {
+    @org.junit.jupiter.api.Test
+    void searchByAge() {
+        Repository search = r1.searchByAge(20);
+        assertEquals(search.repos[0].getAge(), 20);
     }
 
-    @org.junit.Test
-    public void searchById() {
-    }
-
-    @org.junit.Test
-    public void insertPerson() {
-
-    }
-
-    @org.junit.Test
-    public void changePersonByIndex() {
+    @org.junit.jupiter.api.Test
+    void searchById() {
+        Repository search = r1.searchById(10);
+        assertEquals(search.repos[0].getId(), 10);
     }
 }
