@@ -8,7 +8,7 @@ import Sortings.Sort;
 import java.util.Comparator;
 
 public class Repository {
-    private Person repos[];
+    public Person repos[];
     private Comparator<Person> compAge = new PersonAgeComparator();
     private Comparator<Person> compName = new PersonNameComparator();
     private Comparator<Person> compId = new PersonIdComparator();
@@ -27,6 +27,10 @@ public class Repository {
             repos = new Person[size];
             sorter = typeSort;
         }
+        private Repository(int size)
+        {
+            this.size = size;
+        }
 
         private void sorting(Person repos[],Comparator<Person> comp){
             sorter.sort(repos,comp);
@@ -43,6 +47,10 @@ public class Repository {
             sorting(repos,compId);
         }
 
+    /**
+     * check*
+     * Функция сравнения определенного значения. Если true, то совпадение.
+     */
         private boolean checkName(String name,Person person)
         {
             Person temp = new Person();
@@ -66,27 +74,33 @@ public class Repository {
             return false;
         }
 
-    public void searchByName(String name){
+    public Repository searchByName(String name){
+            Repository temp = new Repository(0);
         for(int i=0;i<getSize();i++) {
             if(checkName(name,repos[i])){
-                showPersonByIndex(i);
+                temp.insertPerson(repos[i]);
             }
         }
+        return temp;
     }
 
-    public void searchByAge(int value){
+    public Repository searchByAge(int value){
+        Repository temp = new Repository(0);
         for(int i=0;i<getSize();i++) {
             if(checkAge(value,repos[i])){
-                showPersonByIndex(i);
+                temp.insertPerson(repos[i]);
             }
         }
+        return temp;
     }
-    public void searchById(int value){
+    public Repository searchById(int value){
+        Repository temp = new Repository(0);
         for(int i=0;i<getSize();i++) {
             if(checkId(value,repos[i])){
-                showPersonByIndex(i);
+                temp.insertPerson(repos[i]);
             }
         }
+        return temp;
     }
 
 
