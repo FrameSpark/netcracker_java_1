@@ -68,6 +68,10 @@ public class Person{
         return temp;
     }
 
+    public int getAgeFromSet(){
+        return this.age;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }

@@ -1,9 +1,14 @@
 package Person;
 
+import Person.Checker.Checker;
+import Person.Checker.PersonAgeChecker;
+import Person.Checker.PersonIdChecker;
+import Person.Checker.PersonNameChecker;
 import Person.Comparators.PersonAgeComparator;
 import Person.Comparators.PersonIdComparator;
 import Person.Comparators.PersonNameComparator;
 import Sortings.Sort;
+import org.joda.time.LocalDate;
 
 import java.util.Comparator;
 
@@ -12,6 +17,9 @@ public class Repository {
     private Comparator<Person> compAge = new PersonAgeComparator();
     private Comparator<Person> compName = new PersonNameComparator();
     private Comparator<Person> compId = new PersonIdComparator();
+    private Checker<Person> checkAge = new PersonAgeChecker();
+    private Checker<Person> checkId = new PersonIdChecker();
+    private Checker<Person> checkName = new PersonNameChecker();
     private Sort sorter;
     private int size;
 
@@ -51,55 +59,43 @@ public class Repository {
      * check*
      * Функция сравнения определенного значения. Если true, то совпадение.
      */
-        private boolean checkName(String name,Person person)
-        {
-            Person temp = new Person();
-            temp.setFullName(name);
-            if(compName.compare(temp,person) ==  0)
-                return true;
-            return false;
-        }
-        private boolean checkAge(int value, Person person){
 
-            if(value - person.getAge() ==  0)
-                return true;
-            return false;
-        }
-        private boolean checkId(int value, Person person){
-            Person temp = new Person();
-            temp.setId(value);
-            if(compId.compare(temp,person) ==  0)
-                return true;
-            return false;
-        }
+    private boolean seacrh(Checker<Person> checker, Person one, Person two){
+
+       return checker.check(one,two);
+    }
 
     public Repository searchByName(String name){
-            Repository temp = new Repository(0);
+            Person temp = new Person(1,name,1,new LocalDate("2010-10-10"));
+             Repository tempRep = new Repository(0);
         for(int i=0;i<getSize();i++) {
-            if(checkName(name,repos[i])){
-                temp.insertPerson(repos[i]);
+            if(seacrh(checkName,temp,repos[i])){
+                tempRep.insertPerson(repos[i]);
             }
         }
-        return temp;
+        return tempRep;
     }
 
     public Repository searchByAge(int value){
-        Repository temp = new Repository(0);
+        Person temp = new Person(1,"temper",1,new LocalDate("2010-10-10"));
+        temp.setAge(value);
+        Repository tempRep = new Repository(0);
         for(int i=0;i<getSize();i++) {
-            if(checkAge(value,repos[i])){
-                temp.insertPerson(repos[i]);
+            if(seacrh(checkAge,temp,repos[i])){
+                tempRep.insertPerson(repos[i]);
             }
         }
-        return temp;
+        return tempRep;
     }
     public Repository searchById(int value){
-        Repository temp = new Repository(0);
+        Person temp = new Person(value,"temper",1,new LocalDate("2010-10-10"));
+        Repository tempRep = new Repository(0);
         for(int i=0;i<getSize();i++) {
-            if(checkId(value,repos[i])){
-                temp.insertPerson(repos[i]);
+            if(seacrh(checkId,temp,repos[i])){
+                tempRep.insertPerson(repos[i]);
             }
         }
-        return temp;
+        return tempRep;
     }
 
 
