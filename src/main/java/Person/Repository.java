@@ -1,5 +1,7 @@
 package Person;
 
+
+
 import Person.Checker.Checker;
 import Person.Checker.PersonAgeChecker;
 import Person.Checker.PersonIdChecker;
@@ -11,9 +13,11 @@ import Sortings.Sort;
 import org.joda.time.LocalDate;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 public class Repository {
     public Person repos[];
+    private static final Logger log = Logger.getLogger("Repository.class");
     private Comparator<Person> compAge = new PersonAgeComparator();
     private Comparator<Person> compName = new PersonNameComparator();
     private Comparator<Person> compId = new PersonIdComparator();
@@ -34,6 +38,7 @@ public class Repository {
             setSize(size);
             repos = new Person[size];
             sorter = typeSort;
+            log.info("Репозиторий создан!");
         }
         private Repository(int size)
         {
@@ -42,17 +47,21 @@ public class Repository {
 
         private void sorting(Person repos[],Comparator<Person> comp){
             sorter.sort(repos,comp);
+
         }
 
         public void sortByName(){
             sorting(repos,compName);
+            log.info("Отсортировано по имени!");
         }
 
         public void sortByAge(){
             sorting(repos,compAge);
+            log.info("Отсортировано по возрасти!");
         }
         public void sortById(){
             sorting(repos,compId);
+            log.info("Отсортировано по идентификатору!");
         }
 
     /**
@@ -111,6 +120,7 @@ public class Repository {
             }
             temp[getSize()-1] = newPerson;
             repos = temp;
+            log.info("Персонаж добавлен! Текущий размер: " + size);
         }
 
     /**
@@ -123,6 +133,7 @@ public class Repository {
             return true;
         }
         else{
+            log.warning("Был запрошен индекс вне размерности! Зпрошено: " + index + " Размер: " + size);
             return false;
             }
         }
@@ -168,6 +179,7 @@ public class Repository {
                 }
                 repos = temp;
             }
+            log.info("Персонаж удален! Текущий размер: " + size);
         }
 
 
