@@ -11,13 +11,17 @@ import Person.Comparators.PersonIdComparator;
 import Person.Comparators.PersonNameComparator;
 import Sortings.Sort;
 import org.joda.time.LocalDate;
-
 import java.util.Comparator;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 
 public class Repository {
     public Person repos[];
-    private static final Logger log = Logger.getLogger("Repository.class");
+   // private static final Logger log = Logger.getLogger("Repository.class");
+    private final Logger log = LogManager.getRootLogger();
     private Comparator<Person> compAge = new PersonAgeComparator();
     private Comparator<Person> compName = new PersonNameComparator();
     private Comparator<Person> compId = new PersonIdComparator();
@@ -53,6 +57,7 @@ public class Repository {
         public void sortByName(){
             sorting(repos,compName);
             log.info("Отсортировано по имени!");
+
         }
 
         public void sortByAge(){
@@ -133,7 +138,7 @@ public class Repository {
             return true;
         }
         else{
-            log.warning("Был запрошен индекс вне размерности! Зпрошено: " + index + " Размер: " + size);
+            log.error("Был запрошен индекс вне размерности! Зпрошено: " + index + " Размер: " + size);
             return false;
             }
         }

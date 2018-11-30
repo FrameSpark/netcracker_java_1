@@ -3,7 +3,7 @@ import org.joda.time.LocalDate;
 
 import java.util.Scanner;
 
-public class Controller {
+class Controller {
     public void printMenu()
     {
         System.out.println("1 - Get a size");
