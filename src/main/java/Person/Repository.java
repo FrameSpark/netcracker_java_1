@@ -74,42 +74,26 @@ public class Repository {
      * Функция сравнения определенного значения. Если true, то совпадение.
      */
 
-    private boolean seacrh(Checker<Person> checker, Person one, Person two){
-
-       return checker.check(one,two);
-    }
-
-    public Repository searchByName(String name){
-            Person temp = new Person(1,name,1,new LocalDate("2010-10-10"));
-             Repository tempRep = new Repository(0);
-        for(int i=0;i<getSize();i++) {
-            if(seacrh(checkName,temp,repos[i])){
-                tempRep.insertPerson(repos[i]);
+   private Person[] seacrh(Checker<Person> checker, Person[] repos, Object s){
+        Repository temp = new Repository(0);
+        for(int i=0;i<repos.length;i++) {
+            if(checker.check(repos[i],s)){
+                temp.insertPerson(repos[i]);
             }
         }
-        return tempRep;
+        return temp.repos;
+
     }
 
-    public Repository searchByAge(int value){
-        Person temp = new Person(1,"temper",1,new LocalDate("2010-10-10"));
-        temp.setAge(value);
-        Repository tempRep = new Repository(0);
-        for(int i=0;i<getSize();i++) {
-            if(seacrh(checkAge,temp,repos[i])){
-                tempRep.insertPerson(repos[i]);
-            }
-        }
-        return tempRep;
+    public Person[] searchByName(String name){
+        return seacrh(checkName, repos, name );
+      }
+
+    public Person[] searchByAge(int value){
+        return seacrh(checkAge, repos, new Integer(value));
     }
-    public Repository searchById(int value){
-        Person temp = new Person(value,"temper",1,new LocalDate("2010-10-10"));
-        Repository tempRep = new Repository(0);
-        for(int i=0;i<getSize();i++) {
-            if(seacrh(checkId,temp,repos[i])){
-                tempRep.insertPerson(repos[i]);
-            }
-        }
-        return tempRep;
+    public Person[] searchById(int value){
+        return seacrh(checkId, repos, new Integer(value) );
     }
 
 

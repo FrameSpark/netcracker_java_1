@@ -4,10 +4,11 @@ import Person.Person;
  * Created by strogonov_vg on 30.11.2018.
  */
 public class PersonAgeChecker implements Checker<Person> {
-    public boolean check(Person o1, Person o2) {
+    public boolean check(Person o1, Object o2) {
 
-        if( o1.getAgeFromSet()- o2.getAge() ==  0)
+        if(o1.getAge()==(Integer)o2)
             return true;
         return false;
+
     }
 }
