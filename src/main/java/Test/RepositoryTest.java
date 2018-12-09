@@ -84,19 +84,19 @@ class RepositoryTest {
 
     @org.junit.jupiter.api.Test
     void searchByName() {
-        Repository search = r1.searchByName("Viacheslav");
-        assertEquals(search.repos[0].getFullName(), "Viacheslav");
+         r1.searchByName("Viacheslav");
+        assertEquals(r1.repos[0].getFullName(), "Viacheslav");
     }
 
     @org.junit.jupiter.api.Test
     void searchByAge() {
-        Repository search = r1.searchByAge(20);
-        assertEquals(search.repos[0].getAge(), 20);
+         r1.searchByAge(20);
+        assertEquals(r1.repos[0].getAge(), 20);
     }
 
     @org.junit.jupiter.api.Test
     void searchById() {
-        Repository search = r1.searchById(10);
-        assertEquals(search.repos[0].getId(), 10);
+       r1.searchById(10);
+        assertEquals(r1.repos[0].getId(), 10);
     }
 }

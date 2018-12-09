@@ -4,7 +4,7 @@ import Person.Person;
 
 import java.util.Comparator;
 
-public class GnomeSort extends Sort {
+public class GnomeSort implements Sort<Person> {
     public void sort(Person[] mas, Comparator<Person> comp) {
         int i = 1;
         int j = 2;

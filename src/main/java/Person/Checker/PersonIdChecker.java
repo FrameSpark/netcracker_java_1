@@ -8,7 +8,7 @@ public class PersonIdChecker implements Checker<Person> {
 
     public boolean check(Person o1, Object o2) {
 
-        if(o1.getId() == o2) return true;
+        if(o1.getId() == (Integer)o2) return true;
         return false;
     }
 }

@@ -4,12 +4,14 @@ import Sortings.BubbleSort;
 import Sortings.GnomeSort;
 import Sortings.ShellSort;
 import org.joda.time.LocalDate;
-
+import Person.Injector;
 import java.util.Scanner;
+import java.util.zip.Inflater;
 
 public class Main {
     public static void main(String[] args) {
-
+   // Repository rep = (new Injector<Repository>().inject(new Repository(0)));
+         new Injector<Repository>().inject(new Repository(0));
 
 
 /*

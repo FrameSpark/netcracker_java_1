@@ -4,8 +4,7 @@ import Person.Person;
 
 import java.util.Comparator;
 
-public class BubbleSort extends Sort {
-    @Override
+public class BubbleSort implements Sort<Person> {
     public void sort(Person[] mas, Comparator<Person> comp) {
         for (int i = mas.length - 1; i >= 0; i--)
             for (int j = 0; j < i; j++)

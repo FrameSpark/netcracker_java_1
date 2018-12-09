@@ -4,7 +4,7 @@ import Person.Person;
 
 import java.util.Comparator;
 
-public class ShellSort extends Sort {
+public class ShellSort implements Sort<Person> {
    public void sort(Person[] mas, Comparator<Person> comp) {
 
        int i, j, k, n=mas.length;

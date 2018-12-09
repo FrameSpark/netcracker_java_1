@@ -2,6 +2,7 @@ package Person;
 
 
 
+import Person.Annotaion.AutoInjectable;
 import Person.Checker.Checker;
 import Person.Checker.PersonAgeChecker;
 import Person.Checker.PersonIdChecker;
@@ -9,10 +10,8 @@ import Person.Checker.PersonNameChecker;
 import Person.Comparators.PersonAgeComparator;
 import Person.Comparators.PersonIdComparator;
 import Person.Comparators.PersonNameComparator;
-import Sortings.Sort;
-import org.joda.time.LocalDate;
 import java.util.Comparator;
-import org.apache.logging.log4j.Level;
+import Sortings.Sort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,8 +26,12 @@ public class Repository {
     private Comparator<Person> compId = new PersonIdComparator();
     private Checker<Person> checkAge = new PersonAgeChecker();
     private Checker<Person> checkId = new PersonIdChecker();
+
     private Checker<Person> checkName = new PersonNameChecker();
-    private Sort sorter;
+
+    @AutoInjectable
+    private Sort<Person> sorter;
+
     private int size;
 
         public int getSize() {
@@ -44,10 +47,13 @@ public class Repository {
             sorter = typeSort;
             log.info("Репозиторий создан!");
         }
-        private Repository(int size)
+        public Repository(int size)
         {
             this.size = size;
         }
+
+
+
 
         private void sorting(Person repos[],Comparator<Person> comp){
             sorter.sort(repos,comp);
