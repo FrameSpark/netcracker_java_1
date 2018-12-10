@@ -1,17 +1,17 @@
 import Person.Person;
 import Person.Repository;
-import Sortings.BubbleSort;
-import Sortings.GnomeSort;
-import Sortings.ShellSort;
-import org.joda.time.LocalDate;
 import Person.Injector;
-import java.util.Scanner;
-import java.util.zip.Inflater;
+import org.joda.time.LocalDate;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-   // Repository rep = (new Injector<Repository>().inject(new Repository(0)));
-         new Injector<Repository>().inject(new Repository(0));
+    public static void main(String[] args) throws IOException, IllegalAccessException, ClassNotFoundException {
+    Repository rep =  new Injector().inject(new Repository(0));
+    rep.insertPerson(new Person(1,"Alexey",1,new LocalDate(2010-10-10)));
+    rep.sortById();
+
+
 
 
 /*

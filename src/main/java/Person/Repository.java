@@ -30,7 +30,7 @@ public class Repository {
     private Checker<Person> checkName = new PersonNameChecker();
 
     @AutoInjectable
-    private Sort<Person> sorter;
+    public Sort<Person> sorter;
 
     private int size;
 
